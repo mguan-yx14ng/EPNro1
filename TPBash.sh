@@ -20,17 +20,22 @@ opcion_2() {
         bash ~/EPNro1/consolidar.sh
     else
         touch ~/EPNro1/salida/$FILENAME
+        bash ~/EPNro1/consolidar.sh
     fi
 }
 
 export FILENAME="FILENAME.txt"
 
-echo -n"$menu"
-read opcion
+opcion = " "
 
-if [ $opcion -eq 1 ]; then
-    opcion_1
-elif [ $opcion -eq 2 ]; then
-    opcion_2
-fi
+while [[ ! $opcion -eq "-d"]] do
+    echo -n"$menu"
+    read opcion
 
+    if [ $opcion -eq 1 ]; then
+        opcion_1
+    elif [ $opcion -eq 2 ]; then
+        opcion_2
+    fi
+
+done
