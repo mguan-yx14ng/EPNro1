@@ -24,6 +24,14 @@ opcion_2() {
     fi
 }
 
+opcion_4() {
+    if [ -f ~/EPNro1/salida/$FILENAME ]; then
+        sort -k5 -n -r ~/EPNro1/salida/$FILENAME | head -n 10
+    else
+        echo "No existe FILENAME.txt en salida"
+    fi
+}
+
 export FILENAME="FILENAME.txt"
 
 opcion = " "
