@@ -42,6 +42,15 @@ opcion_4() {
     fi
 }
 
+opcion_5() {
+	read -p "ingrese el numero de padron: " padron
+	if [ -f ~/EPNro1/salida/$FILENAME ]; then
+		grep "^$padron " ~/EPNro1/salida/$FILENAME
+	else 
+		echo "no existe FILENAME.txt en salida"
+	fi
+}
+	
 export FILENAME="FILENAME.txt"
 
 opcion = " "
