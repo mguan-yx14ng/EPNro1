@@ -24,6 +24,16 @@ opcion_2() {
     fi
 }
 
+opcion_3() {
+    if [ -f ~/EPNro1/salida/$FILENAME]; then
+	sort -k1 -n ~/EPNro1/salida/$FILENAME | cat
+    else
+	echo "No existe FILENAME.txt en la carpeta salida"
+    fi
+
+}
+
+
 opcion_4() {
     if [ -f ~/EPNro1/salida/$FILENAME ]; then
         sort -k5 -n -r ~/EPNro1/salida/$FILENAME | head -n 10
