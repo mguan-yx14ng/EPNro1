@@ -28,7 +28,7 @@ opcion_2() {
             cat ./entrada/*.txt >> ./salida/${FILENAME}.txt
 
         mv ./entrada/*.txt ./procesado
-        EOF
+EOF
         fi
     if [ -f ~/EPNro1/*.txt ]; then
         if [ -f ~/EPNro1/${FILENAME}.txt ];then
