@@ -1,4 +1,7 @@
 #!/bin/bash
+
+export FILENAME="FILENAME"
+
 menu="=== Menu ===
 1) Crear Entorno
 2) Correr proceso
@@ -17,26 +20,30 @@ opcion_1() {
 }
 
 opcion_2() {
-    while [[ ! -f ~/EPNro1/consolidar.sh ]]; do
+    if [[ ! -f ~/EPNro1/consolidar.sh ]]; then
         touch ~/EPNro1/consolidar.sh
         cat <<EOF >> ~/EPNro1/consolidar.sh
+            #!/bin/bash
 
+            cat ./entrada/*.txt >> ./salida/${FILENAME}.txt
+
+        mv ./entrada/*.txt ./procesado
         EOF
-
-        if [ -f ~/EPNro1/*.txt ]; then
-            if [ -f ~/EPNro1/${FILENAME}.txt ];then
-                bash ~/EPNro1/consolidar.sh &
-            else
-                touch ~/EPNro1/salida/${FILENAME}.txt
-                bash ~/EPNro1/consolidar.sh &
-            fi
-            echo "Se ha procesado el contenido."
-        else
-            echo "No hay ningun archivo en ENTRADA."
         fi
+    if [ -f ~/EPNro1/*.txt ]; then
+        if [ -f ~/EPNro1/${FILENAME}.txt ];then
+            bash ~/EPNro1/consolidar.sh &
+        else
+            touch ~/EPNro1/salida/${FILENAME}.txt
+            bash ~/EPNro1/consolidar.sh &
+        fi
+        echo "Se ha procesado el contenido."
+    else
+        echo "No hay ningun archivo en ENTRADA."
+    fi
 }
 
-export FILENAME="FILENAME"
+
 opcion_3() {
     if [ -f ~/EPNro1/salida/$FILENAME]; then
 	sort -k1 -n ~/EPNro1/salida/$FILENAME | cat
@@ -51,7 +58,7 @@ opcion_4() {
     if [ -f ~/EPNro1/salida/$FILENAME ]; then
         sort -k5 -n -r ~/EPNro1/salida/$FILENAME | head -n 10
     else
-        echo "No existe FILENAME.txt en salida"
+        echo "No existe FILENAME.txt en la carpeta salida"
     fi
 }
 
@@ -60,8 +67,12 @@ opcion_5() {
 	if [ -f ~/EPNro1/salida/$FILENAME ]; then
 		grep "^$padron " ~/EPNro1/salida/$FILENAME
 	else 
-		echo "no existe FILENAME.txt en salida"
+		echo "no existe FILENAME.txt en la carpeta salida"
 	fi
+}
+
+opcion_d() {
+    rm -rf ~/EPNro1
 }
 
 respuesta=""
@@ -92,6 +103,7 @@ while [[ $respuesta != "6" ]]; do
             echo "Opcion invalida, por favor elija una opcion de las mostradas"
             ;;
     esac
+    echo "Saliendo..."
 done
 
 echo "Script Cerrado"
