@@ -31,6 +31,34 @@ opcion_2() {
 }
 
 export FILENAME="FILENAME"
+opcion_3() {
+    if [ -f ~/EPNro1/salida/$FILENAME]; then
+	sort -k1 -n ~/EPNro1/salida/$FILENAME | cat
+    else
+	echo "No existe FILENAME.txt en la carpeta salida"
+    fi
+
+}
+
+
+opcion_4() {
+    if [ -f ~/EPNro1/salida/$FILENAME ]; then
+        sort -k5 -n -r ~/EPNro1/salida/$FILENAME | head -n 10
+    else
+        echo "No existe FILENAME.txt en salida"
+    fi
+}
+
+opcion_5() {
+	read -p "ingrese el numero de padron: " padron
+	if [ -f ~/EPNro1/salida/$FILENAME ]; then
+		grep "^$padron " ~/EPNro1/salida/$FILENAME
+	else 
+		echo "no existe FILENAME.txt en salida"
+	fi
+}
+	
+export FILENAME="FILENAME.txt"
 
 respuesta=""
 
