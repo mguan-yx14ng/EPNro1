@@ -17,17 +17,23 @@ opcion_1() {
 }
 
 opcion_2() {
-    if [ -f ~/EPNro1/*.txt ]; then
-        if [ -f ~/EPNro1/${FILENAME}.txt ];then
-            bash ~/EPNro1/consolidar.sh &
+    while [[ ! -f ~/EPNro1/consolidar.sh ]]; do
+        touch ~/EPNro1/consolidar.sh
+        cat <<EOF >> ~/EPNro1/consolidar.sh
+
+        EOF
+
+        if [ -f ~/EPNro1/*.txt ]; then
+            if [ -f ~/EPNro1/${FILENAME}.txt ];then
+                bash ~/EPNro1/consolidar.sh &
+            else
+                touch ~/EPNro1/salida/${FILENAME}.txt
+                bash ~/EPNro1/consolidar.sh &
+            fi
+            echo "Se ha procesado el contenido."
         else
-            touch ~/EPNro1/salida/${FILENAME}.txt
-            bash ~/EPNro1/consolidar.sh &
+            echo "No hay ningun archivo en ENTRADA."
         fi
-        echo "Se ha procesado el contenido."
-    else
-        echo "No hay ningun archivo en ENTRADA."
-    fi
 }
 
 export FILENAME="FILENAME"
@@ -57,8 +63,6 @@ opcion_5() {
 		echo "no existe FILENAME.txt en salida"
 	fi
 }
-	
-export FILENAME="FILENAME.txt"
 
 respuesta=""
 
@@ -72,6 +76,15 @@ while [[ $respuesta != "6" ]]; do
         2)
             opcion_2
             ;;
+        3)
+            opcion_3
+            ;;
+        4)
+            opcion_4
+            ;;
+        5)
+            opcion_5
+            ;;;
         -d)
             #aca va el la funcion que borrara las carpetas entrada, salida, procesado con todo el contenido
             ;;
