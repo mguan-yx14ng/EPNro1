@@ -95,9 +95,9 @@ while [[ $respuesta != "6" ]]; do
             ;;
         5)
             opcion_5
-            ;;;
+            ;;
         -d)
-            #aca va el la funcion que borrara las carpetas entrada, salida, procesado con todo el contenido
+            opcion_d
             ;;
         *)
             echo "Opcion invalida, por favor elija una opcion de las mostradas"
