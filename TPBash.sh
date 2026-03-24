@@ -23,14 +23,12 @@ opcion_2() {
     if [[ ! -f ~/EPNro1/consolidar.sh ]]; then
         touch ~/EPNro1/consolidar.sh
         cat <<EOF >> ~/EPNro1/consolidar.sh
-            #!/bin/bash
-
-            cat ./entrada/*.txt >> ./salida/${FILENAME}.txt
-
-        mv ./entrada/*.txt ./procesado
+#!/bin/bash
+cat ~/EPNro1/entrada/*.txt >> ~/EPNro1/salida/FILENAME.txt
+mv ~/EPNro1/entrada/*.txt ~/EPNro1/procesado/
 EOF
 	fi
-    if [ -f ~/EPNro1/entrada/*.txt ]; then
+    if ls ~/EPNro1/entrada/*.txt >/dev/null 2>&1; then
         if [ -f ~/EPNro1/${FILENAME}.txt ];then
             bash ~/EPNro1/consolidar.sh &
         else
@@ -45,8 +43,8 @@ EOF
 
 
 opcion_3() {
-    if [ -f ~/EPNro1/salida/$FILENAME ]; then
-	sort -k1 -n ~/EPNro1/salida/$FILENAME | cat
+    if [ -f ~/EPNro1/salida/${FILENAME}.txt ]; then
+	sort -k1 -n ~/EPNro1/salida/${FILENAME}.txt | cat
     else
 	echo "No existe FILENAME.txt en la carpeta salida"
     fi
@@ -55,8 +53,8 @@ opcion_3() {
 
 
 opcion_4() {
-    if [ -f ~/EPNro1/salida/$FILENAME ]; then
-        sort -k5 -n -r ~/EPNro1/salida/$FILENAME | head -n 10
+    if [ -f ~/EPNro1/salida/${FILENAME}.txt ]; then
+        sort -k5 -n -r ~/EPNro1/salida/${FILENAME}.txt | head -n 10
     else
         echo "No existe FILENAME.txt en la carpeta salida"
     fi
@@ -64,8 +62,10 @@ opcion_4() {
 
 opcion_5() {
 	read -p "ingrese el numero de padron: " padron
-	if [ -f ~/EPNro1/salida/$FILENAME ]; then
-		grep "^$padron " ~/EPNro1/salida/$FILENAME
+	if [ -f ~/EPNro1/salida/${FILENAME}.txt ]; then
+		if ! grep "^$padron " ~/EPNro1/salida/${FILENAME}.txt; then
+            echo "No se encontro ningun alumno con el patron: $patron"
+        fi
 	else 
 		echo "no existe FILENAME.txt en la carpeta salida"
 	fi
@@ -98,6 +98,7 @@ while [[ $respuesta != "6" ]]; do
             ;;
         6) 
             echo "Saliendo..."
+            ;;
         -d)
             opcion_d
             ;;
