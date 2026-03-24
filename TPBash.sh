@@ -45,7 +45,7 @@ EOF
 
 
 opcion_3() {
-    if [ -f ~/EPNro1/salida/$FILENAME]; then
+    if [ -f ~/EPNro1/salida/$FILENAME ]; then
 	sort -k1 -n ~/EPNro1/salida/$FILENAME | cat
     else
 	echo "No existe FILENAME.txt en la carpeta salida"
