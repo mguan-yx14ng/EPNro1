@@ -29,7 +29,7 @@ opcion_2() {
 
         mv ./entrada/*.txt ./procesado
 EOF
-        fi
+	fi
     if [ -f ~/EPNro1/*.txt ]; then
         if [ -f ~/EPNro1/${FILENAME}.txt ];then
             bash ~/EPNro1/consolidar.sh &
