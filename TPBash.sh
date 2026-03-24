@@ -30,7 +30,7 @@ opcion_2() {
         mv ./entrada/*.txt ./procesado
 EOF
 	fi
-    if [ -f ~/EPNro1/*.txt ]; then
+    if [ -f ~/EPNro1/entrada/*.txt ]; then
         if [ -f ~/EPNro1/${FILENAME}.txt ];then
             bash ~/EPNro1/consolidar.sh &
         else
@@ -96,6 +96,8 @@ while [[ $respuesta != "6" ]]; do
         5)
             opcion_5
             ;;
+        6) 
+            echo "Saliendo..."
         -d)
             opcion_d
             ;;
@@ -103,7 +105,6 @@ while [[ $respuesta != "6" ]]; do
             echo "Opcion invalida, por favor elija una opcion de las mostradas"
             ;;
     esac
-    echo "Saliendo..."
 done
 
 echo "Script Cerrado"
