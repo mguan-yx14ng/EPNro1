@@ -64,7 +64,7 @@ opcion_5() {
 	read -p "ingrese el numero de padron: " padron
 	if [ -f ~/EPNro1/salida/${FILENAME}.txt ]; then
 		if ! grep "^$padron " ~/EPNro1/salida/${FILENAME}.txt; then
-            echo "No se encontro ningun alumno con el patron: $patron"
+            echo "No se encontro ningun alumno con el patron: $padron"
         fi
 	else 
 		echo "no existe FILENAME.txt en la carpeta salida"
